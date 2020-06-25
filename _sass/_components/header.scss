@@ -9,66 +9,30 @@
 }
 
 header[role=banner] {
-  ul {
-    @include unstyled-list;
+  $logo-height: 4.4rem;
+  @include clearfix;
 
-    // *TODO*: De-nest this once we fix lists in WDS
-    li {
-      display: inline-block;
-      background: transparent;
-      width: auto;
+  nav[role=navigation] {
+    float: right;
 
-      a {
-        @include padding(2.3rem 2rem);
-
-        color: $color-gray;
-        font-weight: $font-bold;
-        text-decoration: none;
-
-        &:hover,
-        &:focus {
-          background-color: $color-gray-hover;
-          color: $color-black;
-        }
-
-        &:active {
-          background-color: $color-gray-lightest;
-        }
-
-        &.usa-current {
-          color: $color-black;
-
-          span {
-            border-bottom: $border-accent;
-            padding-bottom: 1.4rem;
-
-            @-moz-document url-prefix() {
-              padding-bottom: 1.3rem; // Current nav link border highlight fix for Firefox
-            }
-
-            @media screen and (-webkit-min-device-pixel-ratio:0) {
-              padding-bottom: 1.45rem; // Current nav link border highlight fix for Safari
-            }
-          }
-        }
-      }
+    @include media($nav-width) {
+      $header-height: $logo-height + (2 * 1rem);
+      $uswds-primary-link-v-padding: 1.3rem + 2.2rem;
+      $uswds-primary-link-font-size: $h5-font-size;
+      padding-top: ($header-height - $uswds-primary-link-v-padding - $uswds-primary-link-font-size) / 2;
     }
   }
 
-  nav[role=navigation] {
-    @include margin(2.15rem null);
-    display: none;
-    float: right;
-    font-size: $small-font-size;
-
-    @include media($medium-screen + $nav-width-extra) {
-      display: block;
-    }
+  .usa-menu-btn {
+    $default-btn-height: 4rem;
+    @include margin(($logo-height - $default-btn-height) / 2);
   }
 }
 
 .site-logo {
-  @include margin(1rem null);
+  @include media($nav-width) {
+    @include margin(1rem null);
+  }
   display: block;
   float: left;
 
